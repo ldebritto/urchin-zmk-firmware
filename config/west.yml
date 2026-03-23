@@ -3,25 +3,25 @@ manifest:
     # zmk official
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-      # bravekarma
-    - name: caksoylar
-      url-base: https://github.com/caksoylar
-      # kyek / duckyb
+    # kyek / duckyb
     - name: duckyb
       url-base: https://github.com/duckyb
-      # nice-view-gem
-    - name: m165437
-      url-base: https://github.com/M165437
+    # urob
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: v0.3.0
       import: app/west.yml
-    - name: urchin-zmk-module
+    - name: urchin-zmk-module # provides the urchin_left/urchin_right shield definitions — not in ZMK mainline
       remote: duckyb
       revision: main
-    - name: nice-view-gem
-      remote: m165437
+    - name: zmk-tri-state
+      remote: urob
+      revision: main
+    - name: zmk-auto-layer
+      remote: urob
       revision: main
   self:
     path: config
