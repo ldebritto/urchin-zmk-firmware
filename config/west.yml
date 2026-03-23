@@ -12,16 +12,16 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: v0.3.0
+      revision: v0.3.0 # kyek's repo has locked this into v0.3... need to investigate if the latest version would not build
       import: app/west.yml
     - name: urchin-zmk-module # provides the urchin_left/urchin_right shield definitions — not in ZMK mainline
       remote: duckyb
       revision: main
     - name: zmk-tri-state
       remote: urob
-      revision: main
+      revision: v0.3
     - name: zmk-auto-layer
       remote: urob
-      revision: main
+      revision: v0.3
   self:
     path: config
