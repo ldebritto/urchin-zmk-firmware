@@ -131,7 +131,6 @@
         tapping-term-ms = <HOLD_TAP_TERM>;
     };
 
-
     hlt: hold_preferred_layer_tap_left {
         compatible = "zmk,behavior-hold-tap";
         label = "BLT";
@@ -141,5 +140,4 @@
         flavor = "hold-preferred";
         tapping-term-ms = <120>; // A shorter timming is required to only tap when deliberately tapping, since the hold-trigger key positions are not used in this behavior and it can be triggered from any key
         hold-while-undecided;
-        quick-tap-ms = <QUICK_TAP>;
     };
