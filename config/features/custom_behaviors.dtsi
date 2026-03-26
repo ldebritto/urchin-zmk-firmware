@@ -121,16 +121,7 @@
         require-prior-idle-ms = <REQUIRE_PRIOR_IDLE>;
     };
 
-// Customized layer-tap for NAV on hold and &tog on tap to work around a 33 keys keymap
-    ltog: layer_tog {
-        compatible = "zmk,behavior-hold-tap";
-        label = "LTOG";
-        bindings = <&lc>, <&tog>;
-        #binding-cells = <2>;
-        flavor = "hold-preferred";
-        tapping-term-ms = <HOLD_TAP_TERM>;
-    };
-
+// Workaround for UNDER on tap and NAV on hold on NAV
     hlt: hold_preferred_layer_tap_left {
         compatible = "zmk,behavior-hold-tap";
         label = "BLT";
