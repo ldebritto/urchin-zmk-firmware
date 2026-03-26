@@ -120,3 +120,26 @@
         quick-tap-ms = <QUICK_TAP>;
         require-prior-idle-ms = <REQUIRE_PRIOR_IDLE>;
     };
+
+// Customized layer-tap for NAV on hold and &tog on tap to work around a 33 keys keymap
+    ltog: layer_tog {
+        compatible = "zmk,behavior-hold-tap";
+        label = "LTOG";
+        bindings = <&lc>, <&tog>;
+        #binding-cells = <2>;
+        flavor = "hold-preferred";
+        tapping-term-ms = <HOLD_TAP_TERM>;
+    };
+
+
+    hlt: hold_preferred_layer_tap_left {
+        compatible = "zmk,behavior-hold-tap";
+        label = "BLT";
+        bindings = <&lc>, <&kp>;
+
+        #binding-cells = <2>;
+        flavor = "hold-preferred";
+        tapping-term-ms = <120>; // A shorter timming is required to only tap when deliberately tapping, since the hold-trigger key positions are not used in this behavior and it can be triggered from any key
+        hold-while-undecided;
+        quick-tap-ms = <QUICK_TAP>;
+    };
