@@ -23,7 +23,6 @@ COMBO(right_backspace,      &hrmr LA(LGUI) BSPC,        RM1 RM3,           DEF N
 
 COMBO(tog_caps_word,        &caps_word,                 LM2 RM2,           DEF,                 COMBO_TIMEOUT)
 COMBO(num_word,             &num_word NUM,              RM2 RIT,           DEF NUM,             COMBO_TIMEOUT)
-COMBO(tog_mouse,            &tog MOU,                   RB1 RB2 RB3,       DEF MOU,             COMBO_TIMEOUT)
 
 COMBO(space_for_nav,        &kp SPC,                    LB1 LB2 LB3,       DEF NAV MOU,         COMBO_TIMEOUT)
 
@@ -34,6 +33,7 @@ COMBO(sys_bootloader,       &bootloader,                LB0 LB1,           FUN, 
 COMBO(sys_clear_br_profile, &bt BT_CLR,                 RB3 RB4,           FUN,                 COMBO_TIMEOUT)
 COMBO(force_ble_over_usb,   &out OUT_BLE,               LT1 LT2 LT3 LT4,   FUN,                 COMBO_TIMEOUT)
 
+COMBO(play_pause,           &ppmp,                      RB1 RB2,               NAV,             COMBO_TIMEOUT)
 COMBO(power,                &kp C_POWER,                RT1 RT2 RT3 RT4,   DEF,                 COMBO_TIMEOUT)
 
 COMBO(toggle_aoe_layer,     &tog AOE,                   LB1 LB2 LB3 LB4,   DEF AOE,             COMBO_TIMEOUT)

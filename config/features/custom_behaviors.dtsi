@@ -132,3 +132,14 @@
         tapping-term-ms = <120>; // A shorter timming is required to only tap when deliberately tapping, since the hold-trigger key positions are not used in this behavior and it can be triggered from any key
         hold-while-undecided;
     };
+
+// Not so sticky
+
+    nk: not_so_sticky_key {
+      compatible = "zmk,behavior-hold-tap";
+      label = "NOT_SO_STICKY_KEY";
+      #binding-cells = <2>;
+      tapping_term_ms = <200>;
+      flavor = "tap-preferred";
+      bindings = <&kp>, <&sk>;
+    };
