@@ -29,6 +29,13 @@
             <&kp C_NEXT>,
             <&kp C_PREVIOUS>;
     };
+
+    caps: caps_word_lock {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&caps_word>, <&kp CAPS>;
+    };
     
     vb_up: volume_brightness_up_on_control {
         compatible = "zmk,behavior-mod-morph";
@@ -50,7 +57,6 @@
 
     hrml: hrml { // urob's home row mods left
         compatible = "zmk,behavior-hold-tap";
-        label = "HRML";
         bindings = <&kp>, <&kp>;
         #binding-cells = <2>;
         // here's the magic
@@ -64,7 +70,6 @@
 
     hrmr: hrmr { // urob's home row mods right
         compatible = "zmk,behavior-hold-tap";
-        label = "HRMR";
         bindings = <&kp>, <&kp>;
         #binding-cells = <2>;
         // here's the magic
@@ -81,7 +86,6 @@
 
     shrml: shrml { // urob's home row mods left
         compatible = "zmk,behavior-hold-tap";
-        label = "SHIFT_HRML";
         bindings = <&kp>, <&kp>;
 
         #binding-cells = <2>;
@@ -94,7 +98,6 @@
 
     shrmr: shrmr { // urob's home row mods right
         compatible = "zmk,behavior-hold-tap";
-        label = "SHIFT_HRMR";
         bindings = <&kp>, <&kp>;
 
         #binding-cells = <2>;
@@ -109,7 +112,6 @@
 
     ltl: better_layer_tap_left { // urob's logic but for a layer-tap on left hand
         compatible = "zmk,behavior-hold-tap";
-        label = "LTL";
         bindings = <&lc>, <&kp>;
 
         #binding-cells = <2>;
@@ -120,27 +122,3 @@
         quick-tap-ms = <QUICK_TAP>;
         require-prior-idle-ms = <REQUIRE_PRIOR_IDLE>;
     };
-
-// Workaround for UNDER on tap and NAV on hold on NAV
-    hlt: hold_preferred_layer_tap_left {
-        compatible = "zmk,behavior-hold-tap";
-        label = "BLT";
-        bindings = <&lc>, <&kp>;
-
-        #binding-cells = <2>;
-        flavor = "hold-preferred";
-        tapping-term-ms = <120>; // A shorter timming is required to only tap when deliberately tapping, since the hold-trigger key positions are not used in this behavior and it can be triggered from any key
-        hold-while-undecided;
-    };
-
-// Not so sticky
-
-    nk: not_so_sticky_key {
-      compatible = "zmk,behavior-hold-tap";
-      label = "NOT_SO_STICKY_KEY";
-      #binding-cells = <2>;
-      tapping_term_ms = <200>;
-      flavor = "tap-preferred";
-      bindings = <&kp>, <&sk>;
-    };
-    #define SK(key) &nk key key

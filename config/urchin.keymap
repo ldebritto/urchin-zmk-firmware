@@ -3,18 +3,19 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 
-// Layer and key defines to improve readability
+// Layer and key defines to improve readability on the keymap
 #define DEF  0
 #define NUM  1
-#define NAV  2
-#define SYM  3
-#define FUN  4
-#define MOU  5 // also great for one-handed use with a mouse on the right hand
+#define NUM_L 2 // experimenting with numpad on left hand for mouse usage on the right
+#define NAV  3
+#define SYM  4
+#define FUN  5
+#define MOU  6 // also great for one-handed use with a mouse on the right hand
 
 // AOE layers
-#define AOE 6 // AOE 2 layers with easier access for default shortcuts on main layer
-#define AGS 7
-#define ABS 8
+#define AOE 7 // AOE 2 layers with easier access for default shortcuts on main layer
+#define AGS 8
+#define ABS 9
 
 #define HYPR LG(LS(LC(LALT))) // shorthand for HYPER key hold-tap on G and H keys
 
@@ -25,26 +26,26 @@
 #include "features/timings.h"                       // Timing definitions for hold-taps and combos
 #include "features/core_behaviors_overrides.dtsi"   // Overriding defaults from core behaviors
 #include "features/mouse.dtsi"                      // Requires layer defines above since it uses NAV as input processor
-#include "features/num_word.dtsi"                   // Custom behaviors like swapper and denktop quit
+#include "features/num_word.dtsi"                   // Custom behaviors like swapper and desktop quit
 
 / {
     combos { 
-        #include "features/combos.dtsi"
+        #include "features/combos.dtsi"             // Using a separate file for repurposing it to other keyboards
     };
     
     behaviors { 
-        #include "features/custom_behaviors.dtsi"
+        #include "features/custom_behaviors.dtsi"   // Custom behaviors for hold-taps, swapper and other gimmickry
     };
 
     macros { 
-        #include "features/layer_cancel_macros.dtsi" // Insert a K_CANCEL tap to disengage queued mods from layers 
+        #include "features/layer_cancel_macros.dtsi" // Inserts a K_CANCEL tap to disengage queued mods from layers 
         #include "features/typing_macros.dtsi"       // Typing macros for common words and phrases
     };
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
         
-        tri_layer_for_function_and_number_row_keys {
+        tri_layer_for_function_and_number_row_keys {  // Tri-layer allows to make these keys unsensible to the order of layer key release, so I can trigger NUM from NAV and, on relase of NAV, get to SYM
             if-layers = <NAV SYM>;
             then-layer = <FUN>;
         };
@@ -59,41 +60,50 @@
   &kp Q          &kp W          &kp E         &kp R         &kp T           &kp Y           &kp U          &kp I           &kp O           &kp P
   &hrml LCTRL A  &hrml LALT S   &shrml LSHFT D &hrml LGUI F &hrml HYPR G    &hrmr HYPR H    &hrmr RGUI J   &shrmr LSHFT K  &hrmr RALT L    &hrmr RCTRL SQT
   &hrml GLOBE Z  &kp X          &ltl NUM C    &ltl MOU V    &kp B           &kp N           &kp M          &kp COMMA       &kp DOT         &kp SEMI
-                                              &lc NAV       &kp RSHFT       &kp SPC         &lc SYM
+                                              &lc NAV       &kp RSHFT       &kp SPC       &lc SYM
             >;
         };
 
-        NUM {
+        NUM_R {
             bindings = <
   &kp LA(N9) &kp LA(N0) &none       &reais      &kp LA(N6)  &kp PLUS    &kp N7  &kp N8  &kp N9  &kp ASTRK
-  SK(LCTRL)  SK(LALT)   SK(LSHFT)   SK(LGUI)    SK(LSHFT)   &kp MINUS   &kp N4  &kp N5  &kp N6  &kp SLASH
-  &none      &tog NUM   &none       &triple0    &comma00    &kp COMMA   &kp N1  &kp N2  &kp N3  &kp DOT
-                                    &trans      &trans      &num_spc    &lt SYM N0
+  &sk LCTRL  &sk LALT   &sk LSHFT   &sk LGUI    &sk LSHFT   &kp MINUS   &kp N4  &kp N5  &kp N6  &kp SLASH
+  &none      &none      &none       &triple0    &comma00    &kp COMMA   &kp N1  &kp N2  &kp N3  &kp DOT
+                                    &trans      &tog NUM    &num_spc    &lt SYM N0
+            >;
+        };
+
+        NUM_L {
+            bindings = <
+  &kp PLUS    &kp N7  &kp N8  &kp N9        &kp ASTRK   &kp LA(N6) &reais   &none       &kp LA(N9)  &kp LA(N0) 
+  &kp MINUS   &kp N4  &kp N5  &kp N6        &kp SLASH   &none      &sk LGUI &sk LSHFT   &sk LALT    &sk LCTRL  
+  &kp COMMA   &kp N1  &kp N2  &kp N3        &kp DOT     &none      &none    &none       &triple0    &comma00    
+                              &lt NAV N0    &tog NUM    &num_spc   &trans
             >;
         };
 
         NAV {
             bindings = <
   &kp TAB         &swapper  &kp LC(LS(TAB)) &kp LC(TAB)     &kp LG(RBKT)    &kp PG_UP   &kp HOME  &kp UP    &kp END   &kp BSPC
-  SK(LCTRL)       SK(LALT)  SK(LSHFT)       SK(LGUI)        &kp LG(LBKT)    &kp PG_DN   &kp LEFT  &kp DOWN  &kp RIGHT &kp RET
-  &mt GLOBE LG(Z) &kp LG(X) &kp LG(C)       &lt MOU LG(V)   &kp F18         &playnp     &kp F19   &vb_dn    &vb_up    &kp DEL 
-                                            &trans          &trans          &trans      &trans 
+  &sk LCTRL       &sk LALT  &sk LSHFT       &sk LGUI        &kp LG(LBKT)    &kp PG_DN   &kp LEFT  &kp DOWN  &kp RIGHT &kp RET
+  &mt GLOBE LG(Z) &kp LG(X) &kp LG(C)       &lt MOU LG(V)   &kp F18         &caps       &kp F19   &vb_dn    &vb_up    &kp DEL 
+                                            &trans          &tog NAV        &trans      &trans 
             >; // F18 and F19 are here for triggering macros and shortcuts on macOS without interfering with normal usage on other keys
         };
 
         SYM {
             bindings = <
   &kp ESC           &kp LBRC   &kp LBKT   &kp LPAR   &kp PRCNT    &kp AMPS  &kp RPAR  &kp RBKT   &kp RBRC  &kp DQT
-  &kp MINUS         &kp CARET  &kp GRAVE  &kp TILDE  &kp DOLLAR   &kp HASH  SK(RGUI)  SK(LSHFT)  SK(RALT)  SK(RCTRL)
+  &kp MINUS         &kp CARET  &kp GRAVE  &kp TILDE  &kp DOLLAR   &kp HASH  &sk RGUI  &sk LSHFT  &sk RALT  &sk RCTRL
   &mt GLOBE PLUS    &kp EQUAL  &kp ASTRK  &kp FSLH   &kp AT       &kp PIPE  &kp BSLH  &kp QMARK  &kp EXCL  &mt GLOBE COLON
-                                          &hlt NAV UNDER &trans   &kp UNDER &trans
+                                          &trans     &kp UNDER    &kp UNDER &trans
             >;
         };
 
         FUN {
             bindings = <
   &kp N1    &kp N2    &kp N3     &kp N4    &kp N5       &kp N6    &kp N7    &kp N8     &kp N9    &kp N0
-  SK(LCTRL) SK(LALT)  SK(LSHFT)  SK(LGUI)  &kp F11      &kp F12   SK(RGUI)  SK(LSHFT)  SK(RALT)  SK(RCTRL)
+  &sk LCTRL &sk LALT  &sk LSHFT  &sk LGUI  &kp F11      &kp F12   &sk RGUI  &sk LSHFT  &sk RALT  &sk RCTRL
   &kp F1    &kp F2    &kp F3     &kp F4    &kp F5       &kp F6    &kp F7    &kp F8     &kp F9    &kp F10
                                  &trans    &kp C_POWER  &kp CAPS  &trans
             >;
@@ -103,7 +113,7 @@
             bindings = <
   &kp F11         &kp LC(UP) &kp LC(LS(TAB)) &kp LC(TAB)   &kp LG(RBKT)  &msc SCRL_DOWN  &msc SCRL_RIGHT &mmv MOVE_UP    &msc SCRL_LEFT  &kp BSPC
   SK(LCTRL)       SK(LALT)   SK(LSHFT)       SK(LGUI)      &kp LG(LBKT)  &msc SCRL_UP    &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT &kp ENTER
-  &mt GLOBE LG(Z) &kp LG(X)  &kp LG(C)       &kp LG(V)     &kp F18       &playnp         &mkp MCLK       &mkp MB4        &mkp MB5        &to DEF
+  &mt GLOBE LG(Z) &kp LG(X)  &kp LG(C)       &kp LG(V)     &kp F18       &none           &mkp MCLK       &mkp MB4        &mkp MB5        &to DEF
                                              &trans        &tog MOU      &mkp LCLK       &mkp RCLK            
             >;          
         };
@@ -131,7 +141,7 @@
   &kp LC(LS(M))   &kp LC(LS(S))   &kp LC(LS(U))   &kp LC(LS(Y))   &kp LS(COMMA)    &trans  &trans  &trans  &trans  &trans
   &kp LC(LS(A))   &kp LC(LS(L))   &kp LC(LS(B))   &kp LC(LS(K))   &kp LS(LC(D))    &trans  &trans  &trans  &trans  &trans
   &kp LC(LS(Z))   &kp LC(LS(I))   &kp LC(LS(G))   &kp LC(LS(V))   &kp LC(LS(H))    &trans  &trans  &trans  &trans  &trans
-                                                  &kp LC(LS(H))   &trans           &trans  &trans
+                                                &kp LC(LS(H))   &trans           &trans  &trans
             >;
         };
     };
