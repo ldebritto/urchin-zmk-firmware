@@ -60,7 +60,7 @@
   &kp Q          &kp W          &kp E         &kp R         &kp T           &kp Y           &kp U          &kp I           &kp O           &kp P
   &hrml LCTRL A  &hrml LALT S   &shrml LSHFT D &hrml LGUI F &hrml HYPR G    &hrmr HYPR H    &hrmr RGUI J   &shrmr LSHFT K  &hrmr RALT L    &hrmr RCTRL SQT
   &hrml GLOBE Z  &kp X          &ltl NUM C    &ltl MOU V    &kp B           &kp N           &kp M          &kp COMMA       &kp DOT         &kp SEMI
-                                              &lc NAV       &kp RSHFT       &mt RSHFT SPC   &lc SYM
+                                              &lc NAV       &kp RSHFT       &kp SPC         &lc SYM
             >;
         };
 
@@ -75,9 +75,9 @@
 
         NUM_L {
             bindings = <
-  &kp PLUS    &kp N7  &kp N8  &kp N9        &kp ASTRK   &kp LA(N6) &reais   &none       &kp LA(N9)  &kp LA(N0) 
-  &kp MINUS   &kp N4  &kp N5  &kp N6        &kp SLASH   &none      &sk LGUI &sk LSHFT   &sk LALT    &sk LCTRL  
-  &kp COMMA   &kp N1  &kp N2  &kp N3        &kp DOT     &none      &none    &none       &triple0    &comma00    
+  &kp PLUS    &kp N7  &kp N8  &kp N9        &kp ASTRK   &kp LA(N6) &trans   &trans      &kp LA(N9)  &kp LA(N0) 
+  &kp MINUS   &kp N4  &kp N5  &kp N6        &kp SLASH   &reais     &sk LGUI &sk LSHFT   &sk LALT    &sk LCTRL  
+  &kp COMMA   &kp N1  &kp N2  &kp N3        &kp DOT     &triple0   &comma00 &trans      &trans      &comma00    
                               &lt NAV N0    &tog NUM    &num_spc   &trans
             >;
         };
