@@ -122,3 +122,16 @@
         quick-tap-ms = <QUICK_TAP>;
         require-prior-idle-ms = <REQUIRE_PRIOR_IDLE>;
     };
+    
+    lts: better_layer_tap_for_sym { // urob's logic but for SYM layer
+        compatible = "zmk,behavior-hold-tap";
+        bindings = <&lc>, <&kp>;
+
+        #binding-cells = <2>;
+        hold-trigger-key-positions = <LEFT_SIDE_KEYS RIGHT_SIDE_KEYS>;
+        flavor = "balanced";
+        tapping-term-ms = <HOLD_TAP_TERM>;
+        hold-trigger-on-release;
+        quick-tap-ms = <QUICK_TAP>;
+        require-prior-idle-ms = <REQUIRE_PRIOR_IDLE>;
+    };
